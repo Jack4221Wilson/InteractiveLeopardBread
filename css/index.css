@@ -1,0 +1,85 @@
+:root{
+  --wht:#E1F2E7;
+  --brwn:#B8A25F;
+  --lghtbrwn:#E7CCA0;
+}
+body{
+  background-color: #B8A25F;
+  color: #E1F2E7;
+  font-family: 'garamond', serif;
+  font-size: 14pt;
+}
+.header{
+  position: relative;
+  max-height: 50pt;
+  margin-top: 6pc;
+  margin-left: 7vw;
+  margin-right: 3vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.main{
+  position: relative;
+  margin-top: 4pc;
+  margin-left: 7vw;
+  margin-right: 3vw;
+}
+.header h1{
+  font-size: 48pt;
+  font-weight: normal;
+  margin: 0;
+  min-width: 607px;
+}
+.main h1{
+  text-align: center;
+}
+h2{
+  font-size: 24pt;
+  margin: 0;
+  position: relative;
+  height: 24pt;
+  margin-top: 24pt;
+}
+.dropcont {
+  display: none;
+  position: absolute;
+  margin-top: 6pt;
+  background-color: var(--brwn);
+  border-width: 3px;
+  border-radius: 5px;
+  border-color: var(--wht);
+  border-style: solid;
+  padding-left: 1pc;
+  padding-right: 1pc;
+}
+.dropcontR{
+  display: none;
+  position: absolute;
+  margin-top: 6pt;
+  background-color: var(--brwn);
+  border-width: 3px;
+  border-radius: 5px;
+  border-color: var(--wht);
+  border-style: solid;
+  padding-left: 1pc;
+  padding-right: 1pc;
+  right: 0;
+  max-width: 30vw;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+ol li{
+  margin-top: 6pt;
+}
+/*
+.dropdwn:hover .dropcontR{
+  display: block;
+}
+.dropdwn:hover .dropcont{
+  display: block;
+}*/
+.header h3{
+  font-size: 18pt;
+}
