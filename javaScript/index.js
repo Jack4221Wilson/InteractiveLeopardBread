@@ -1,6 +1,7 @@
 const dropdwn = document.querySelector('.dropdwn')
 const dropdwn1 = document.querySelector('.dropdwn1')
 const main = document.querySelector('.main')
+const canvas = main.querySelector('.canvas')
 let dropMode = 0
 
 //opens and closes the dropdown elements in the header
@@ -31,12 +32,17 @@ dropdwn1.addEventListener('mouseenter', function (){ dropdwn1.children[0].style.
 dropdwn.addEventListener('mouseleave', function(){ dropdwn.children[0].style.color = '#E1F2E7'})
 dropdwn1.addEventListener('mouseleave', function(){ dropdwn1.children[0].style.color = '#E1F2E7'})
 
-function leopardSpot(){
-
+//draws leopard spots
+function leopardSpot(x, y){
+  //draws the dark spots/light border
   const darkSpot = document.createElement('div')
   const dSize = (Math.random() * 100) + 20
   const borderWidth = (Math.random() * 10) + 20
-  darkSpot.style.position = 'relative'
+  const dx = x - ((dSize / 2) + (borderWidth / 2))
+  const dy = y - ((dSize / 2) + (borderWidth / 2))
+  darkSpot.style.position = 'absolute'
+  darkSpot.style.left = `${dx}px`
+  darkSpot.style.top = `${dy}px`
   darkSpot.style.width = `${dSize}px`
   darkSpot.style.height = `${dSize}px`
   darkSpot.style.border = `${borderWidth}px #E7CCA0`
@@ -44,6 +50,7 @@ function leopardSpot(){
   darkSpot.style.borderRadius = '50%'
   darkSpot.style.backgroundColor = '#734729'
 
+  //makes the light spot within the dark spot
   const lightSpot = document.createElement('div')
   const lSize = dSize / 2
   const lpos = (dSize / 2) - (lSize / 2)
@@ -56,10 +63,33 @@ function leopardSpot(){
   lightSpot.style.borderRadius = '50%'
   lightSpot.style.backgroundColor = '#B88E5F'
 
-  main.appendChild(darkSpot)
+  canvas.appendChild(darkSpot)
   darkSpot.appendChild(lightSpot)
   console.log(dSize)
   console.log(lSize)
 }
 
-main.addEventListener('click', leopardSpot)
+function aimer(){
+  const canvasWidth = canvas.clientWidth
+  const canvasHeight = canvas.clientHeight
+  const baseX = canvasWidth / 2
+  const baseY = canvasHeight / 2
+  //fills the background with the beige
+  const bigCircle = document.createElement('div')
+  bigCircle.style.position = 'absolute'
+  bigCircle.style.top = `${baseY - 200}px`
+  bigCircle.style.left = `${baseX - 200}px`
+  bigCircle.style.width = '400px'
+  bigCircle.style.height = '400px'
+  bigCircle.style.borderRadius = '50%'
+  bigCircle.style.backgroundColor = '#E7CCA0'
+  canvas.appendChild(bigCircle)
+  //places leopard spots
+  for (let i = 0; i < 20; i++){
+    let newX = baseX + (Math.floor(Math.random() * (200 + 200 + 1) ) -200)
+    let newY = baseY + (Math.floor(Math.random() * (200 + 200 + 1) ) -200)
+    leopardSpot(newX, newY)
+  }
+}
+
+main.addEventListener('click', aimer)
