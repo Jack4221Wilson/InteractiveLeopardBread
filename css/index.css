@@ -1,10 +1,11 @@
 :root{
   --wht:#E1F2E7;
-  --brwn:#B8A25F;
+  --brwn:#B88E5F;
   --lghtbrwn:#E7CCA0;
+  --darkbrwn:#734729;
 }
 body{
-  background-color: #B8A25F;
+  background-color: #B88E5F;
   color: #E1F2E7;
   font-family: 'garamond', serif;
   font-size: 14pt;

@@ -30,3 +30,36 @@ dropdwn.addEventListener('mouseenter', function (){ dropdwn.children[0].style.co
 dropdwn1.addEventListener('mouseenter', function (){ dropdwn1.children[0].style.color = '#F8E8AB' })
 dropdwn.addEventListener('mouseleave', function(){ dropdwn.children[0].style.color = '#E1F2E7'})
 dropdwn1.addEventListener('mouseleave', function(){ dropdwn1.children[0].style.color = '#E1F2E7'})
+
+function leopardSpot(){
+
+  const darkSpot = document.createElement('div')
+  const dSize = (Math.random() * 100) + 20
+  const borderWidth = (Math.random() * 10) + 20
+  darkSpot.style.position = 'relative'
+  darkSpot.style.width = `${dSize}px`
+  darkSpot.style.height = `${dSize}px`
+  darkSpot.style.border = `${borderWidth}px #E7CCA0`
+  darkSpot.style.borderStyle = 'solid'
+  darkSpot.style.borderRadius = '50%'
+  darkSpot.style.backgroundColor = '#734729'
+
+  const lightSpot = document.createElement('div')
+  const lSize = dSize / 2
+  const lpos = (dSize / 2) - (lSize / 2)
+  lightSpot.style.position = 'absolute'
+  lightSpot.style.top = `${lpos}px`
+  lightSpot.style.left = `${lpos}px`
+  lightSpot.style.width = `${lSize}px`
+  lightSpot.style.height = `${lSize}px`
+  lightSpot.style.border = '#E7CCA0'
+  lightSpot.style.borderRadius = '50%'
+  lightSpot.style.backgroundColor = '#B88E5F'
+
+  main.appendChild(darkSpot)
+  darkSpot.appendChild(lightSpot)
+  console.log(dSize)
+  console.log(lSize)
+}
+
+main.addEventListener('click', leopardSpot)
