@@ -2,15 +2,21 @@ const dropdwn = document.querySelector('.dropdwn')
 const dropdwn1 = document.querySelector('.dropdwn1')
 const main = document.querySelector('.main')
 const canvas = main.querySelector('.canvas')
+const crust = document.querySelector('.crust')
+const butt = document.querySelector('.butt')
+const canvasWidth = canvas.clientWidth
+const canvasHeight = canvas.clientHeight
 let dropMode = 0
 
 //opens and closes the dropdown elements in the header
 function openClose(ele){
   if (dropMode == 0){
     ele.children[1].style.display = 'block'
+    ele.children[1].style.zIndex =  '3'
     dropMode = 1
   }else{
     ele.children[1].style.display = 'none'
+    ele.children[1].style.zIndex =  'auto'
     dropMode = 0
   }
 }
@@ -70,26 +76,38 @@ function leopardSpot(x, y){
 }
 
 function aimer(){
-  const canvasWidth = canvas.clientWidth
-  const canvasHeight = canvas.clientHeight
   const baseX = canvasWidth / 2
   const baseY = canvasHeight / 2
   //fills the background with the beige
   const bigCircle = document.createElement('div')
   bigCircle.style.position = 'absolute'
-  bigCircle.style.top = `${baseY - 200}px`
-  bigCircle.style.left = `${baseX - 200}px`
-  bigCircle.style.width = '400px'
-  bigCircle.style.height = '400px'
-  bigCircle.style.borderRadius = '50%'
+  bigCircle.style.top = `${baseY - canvasHeight/2}px`
+  bigCircle.style.left = `${baseX - canvasHeight/2}px`
+  bigCircle.style.width = `${canvasHeight}px`
+  bigCircle.style.height = `${canvasHeight}px`
   bigCircle.style.backgroundColor = '#E7CCA0'
   canvas.appendChild(bigCircle)
   //places leopard spots
-  for (let i = 0; i < 20; i++){
-    let newX = baseX + (Math.floor(Math.random() * (200 + 200 + 1) ) -200)
-    let newY = baseY + (Math.floor(Math.random() * (200 + 200 + 1) ) -200)
+  for (let i = 0; i < 10; i++){
+    let newX = baseX + (Math.floor(Math.random() * ((canvasHeight/2-100) + (canvasHeight/2-100) + 1) ) -(canvasHeight/2-100))
+    let newY = baseY + (Math.floor(Math.random() * ((canvasHeight/2-100) + (canvasHeight/2-100) + 1) ) -(canvasHeight/2-100))
     leopardSpot(newX, newY)
   }
 }
 
 main.addEventListener('click', aimer)
+
+//making the images
+const crustIMG = document.createElement('img')
+crustIMG.src = 'images/crust.png'
+crustIMG.alt = 'Crust'
+crustIMG.width = `${canvasHeight}`
+crustIMG.height = `${canvasHeight}`
+crust.style.left = `${(canvasWidth/2)-(canvasHeight/2)}px`
+crust.appendChild(crustIMG)
+
+const buttIMG = document.createElement('img')
+buttIMG.src = 'images/Artboard 1.png'
+buttIMG.alt = 'Bread but'
+buttIMG.width = `${canvasHeight}`
+buttIMG.height = `${canvasHeight}`
