@@ -4,9 +4,12 @@ const main = document.querySelector('.main')
 const canvas = main.querySelector('.canvas')
 const crust = document.querySelector('.crust')
 const butt = document.querySelector('.butt')
+const spots = document.querySelector('.spots')
+const resetButton = document.querySelector('.resetButton')
 const canvasWidth = canvas.clientWidth
 const canvasHeight = canvas.clientHeight
 let dropMode = 0
+let lock = 0
 
 //opens and closes the dropdown elements in the header
 function openClose (ele){
@@ -46,6 +49,7 @@ function leopardSpot (x, y){
   const borderWidth = (Math.random() * 10) + 20
   const dx = x - ((dSize / 2) + (borderWidth / 2))
   const dy = y - ((dSize / 2) + (borderWidth / 2))
+  darkSpot.className = 'spot'
   darkSpot.style.position = 'absolute'
   darkSpot.style.left = `${dx}px`
   darkSpot.style.top = `${dy}px`
@@ -69,7 +73,7 @@ function leopardSpot (x, y){
   lightSpot.style.borderRadius = '50%'
   lightSpot.style.backgroundColor = '#B88E5F'
 
-  canvas.appendChild(darkSpot)
+  spots.appendChild(darkSpot)
   darkSpot.appendChild(lightSpot)
   console.log(dSize)
   console.log(lSize)
@@ -80,13 +84,14 @@ function aimer (){
   const baseY = canvasHeight / 2
   //fills the background with the beige
   const bigCircle = document.createElement('div')
+  bigCircle.className = 'bigSpot'
   bigCircle.style.position = 'absolute'
   bigCircle.style.top = `${baseY - canvasHeight/2}px`
   bigCircle.style.left = `${baseX - canvasHeight/2}px`
   bigCircle.style.width = `${canvasHeight}px`
   bigCircle.style.height = `${canvasHeight}px`
   bigCircle.style.backgroundColor = '#E7CCA0'
-  canvas.appendChild(bigCircle)
+  spots.appendChild(bigCircle)
   //places leopard spots
   for (let i = 0; i < 10; i++){
     let newX = baseX + (Math.floor(Math.random() * ((canvasHeight/2-100) + (canvasHeight/2-100) + 1) ) -(canvasHeight/2-100))
@@ -116,7 +121,7 @@ butt.appendChild(buttIMG)
 //moves the butt of bread
 function buttMover (){
   let newX = origin
-  const moving = setInterval(move,50)
+  const moving = setInterval(move,25)
   function move(){
     butt.style.left = `${newX}px`
     newX = newX + 10
@@ -136,8 +141,38 @@ function buttMover (){
   }
   */
 }
+//creates the reset button and prevents repeat clicks
+function lockUp() {
+  if (lock == 0) {
+    resetButton.style.display = 'block'
+    const resetIMG = document.createElement('img')
+    resetIMG.src = 'images/reset.png'
+    resetIMG.alt = 'reset button'
+    resetIMG.width = resetButton.clientWidth
+    resetIMG.height = resetButton.clientHeight
+    resetButton.appendChild(resetIMG)
+    lock = 1
+  }
+}
+
+function reset() {
+  if (lock == 1){
+    spots.replaceChildren()
+    butt.style.left = `${origin}px`
+    resetButton.style.display = 'none'
+    lock = 0
+  }
+}
 
 main.addEventListener('click', ()=>{
-  aimer()
-  buttMover()
+  if (lock == 0) {
+    aimer()
+    buttMover()
+    lockUp()
+  }
+})
+
+resetButton.addEventListener('click', (e) => {
+  reset()
+  e.stopPropagation()
 })

@@ -30,6 +30,7 @@ body{
 .canvas{
   position: relative;
   height: 60vh;
+  overflow: hidden;
 }
 .crust{
   position: absolute;
@@ -42,6 +43,15 @@ body{
   height: 60vh;
   margin-right: 0;
   z-index: 2;
+}
+.resetButton{
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  left: 0;
+  bottom: 0;
+  background-color: var(--wht);
+  display: none;
 }
 .header h1{
   font-size: 48pt;
