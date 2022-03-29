@@ -9,7 +9,7 @@ const canvasHeight = canvas.clientHeight
 let dropMode = 0
 
 //opens and closes the dropdown elements in the header
-function openClose(ele){
+function openClose (ele){
   if (dropMode == 0){
     ele.children[1].style.display = 'block'
     ele.children[1].style.zIndex =  '3'
@@ -22,10 +22,10 @@ function openClose(ele){
 }
 
 //listens to know which element is clicked
-function oc(){
+function oc (){
   openClose(dropdwn)
 }
-function oc1(){
+function oc1 (){
   openClose(dropdwn1)
 }
 
@@ -39,7 +39,7 @@ dropdwn.addEventListener('mouseleave', function(){ dropdwn.children[0].style.col
 dropdwn1.addEventListener('mouseleave', function(){ dropdwn1.children[0].style.color = '#E1F2E7'})
 
 //draws leopard spots
-function leopardSpot(x, y){
+function leopardSpot (x, y){
   //draws the dark spots/light border
   const darkSpot = document.createElement('div')
   const dSize = (Math.random() * 100) + 20
@@ -75,7 +75,7 @@ function leopardSpot(x, y){
   console.log(lSize)
 }
 
-function aimer(){
+function aimer (){
   const baseX = canvasWidth / 2
   const baseY = canvasHeight / 2
   //fills the background with the beige
@@ -95,8 +95,6 @@ function aimer(){
   }
 }
 
-main.addEventListener('click', aimer)
-
 //making the images
 const crustIMG = document.createElement('img')
 crustIMG.src = 'images/crust.png'
@@ -107,7 +105,39 @@ crust.style.left = `${(canvasWidth/2)-(canvasHeight/2)}px`
 crust.appendChild(crustIMG)
 
 const buttIMG = document.createElement('img')
-buttIMG.src = 'images/Artboard 1.png'
+let origin = (canvasWidth/2)-(canvasHeight/2)
+buttIMG.src = 'images/butt.png'
 buttIMG.alt = 'Bread but'
 buttIMG.width = `${canvasHeight}`
 buttIMG.height = `${canvasHeight}`
+butt.style.left = `${origin}px`
+butt.appendChild(buttIMG)
+
+//moves the butt of bread
+function buttMover (){
+  let newX = origin
+  const moving = setInterval(move,50)
+  function move(){
+    butt.style.left = `${newX}px`
+    newX = newX + 10
+    if (newX >= (canvasWidth/2)+(canvasHeight/2)){
+      clearInterval(moving)
+    }
+  }
+/*
+  for (
+    let newX = origin;
+    newX <= (canvasWidth/2)+(canvasHeight/2);
+    newX = newX+1
+  ){
+    let fps = 1000/24
+    function move(){butt.style.left = `${newX}px`}
+    setTimeout(move, fps)
+  }
+  */
+}
+
+main.addEventListener('click', ()=>{
+  aimer()
+  buttMover()
+})
