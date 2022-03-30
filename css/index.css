@@ -110,3 +110,12 @@ ol li{
 .header h3{
   font-size: 18pt;
 }
+footer{
+  text-align: center;
+}
+a {
+  color: var(--wht);
+}
+a:hover{
+  color: var(--lghtbrwn);
+}

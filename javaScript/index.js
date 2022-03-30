@@ -1,6 +1,7 @@
 const dropdwn = document.querySelector('.dropdwn')
 const dropdwn1 = document.querySelector('.dropdwn1')
 const main = document.querySelector('.main')
+const mainH1 = main.querySelector('h1')
 const canvas = main.querySelector('.canvas')
 const crust = document.querySelector('.crust')
 const butt = document.querySelector('.butt')
@@ -129,7 +130,7 @@ function buttMover (){
       clearInterval(moving)
     }
   }
-/*
+/* the orignal idea for buttMover, didn't work
   for (
     let newX = origin;
     newX <= (canvasWidth/2)+(canvasHeight/2);
@@ -154,12 +155,14 @@ function lockUp() {
     lock = 1
   }
 }
-
+//deletes spots, moves bread butt to og position, and unlocks
+//the main space
 function reset() {
   if (lock == 1){
     spots.replaceChildren()
     butt.style.left = `${origin}px`
     resetButton.style.display = 'none'
+    mainH1.textContent = 'Click To Slice The Bread'
     lock = 0
   }
 }
@@ -169,10 +172,15 @@ main.addEventListener('click', ()=>{
     aimer()
     buttMover()
     lockUp()
+    mainH1.textContent = 'Look At Those Spots!'
   }
 })
+main.addEventListener('mouseenter', function (){ mainH1.style.color = '#F8E8AB' })
+main.addEventListener('mouseleave', function(){ mainH1.style.color = '#E1F2E7'})
 
 resetButton.addEventListener('click', (e) => {
   reset()
   e.stopPropagation()
 })
+resetButton.addEventListener('mouseenter', function (){ resetButton.style.backgroundColor = '#F8E8AB' })
+resetButton.addEventListener('mouseleave', function (){ resetButton.style.backgroundColor = '#E1F2E7' })
